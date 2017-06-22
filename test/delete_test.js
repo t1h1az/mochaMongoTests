@@ -25,9 +25,18 @@ describe('Creating records', () =>{
     });//instance of a User
   });
 
+  it('class method remove', (done) => {
+    User.remove({name: 'joefaee'})
+      .then(() => User.findOne({ name: 'joefaee'}))
+      .then((user) => {
+        assert(user === null);
+        done();
+    });//instance of a User
+  });
+
 
   it('class method findOneAndRemove', (done) => {
-    joe.remove()
+    User.findOneAndRemove({ name: 'joefaee'})
       .then(() => User.findOne({ name: 'joefaee'}))
       .then((user) => {
         assert(user === null);
@@ -36,7 +45,7 @@ describe('Creating records', () =>{
   });
 
   it('class method findByIdAndRemove', (done) => {
-    joe.remove()
+    User.findByIdAndRemove(joe._id)
       .then(() => User.findOne({ name: 'joefaee'}))
       .then((user) => {
         assert(user === null);
