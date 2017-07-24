@@ -12,8 +12,8 @@
     "bson": "^1.0.4",
     "kerberos": "0.0.23",
     "mocha": "^3.4.2",
-    "mongodb-core": "^2.1.13",
-    "mongoose": "^4.10.8",
+    "mongodb-core": "^2.1.14",
+    "mongoose": "^4.11.3",
     "node-gyp": "^3.6.2",
     "nodemon": "^1.11.0"
   }

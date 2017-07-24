@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-// befire runs only one time before your entire test runs.
+// before runs only one time before your entire test runs.
 // in contrary beforeEach runs with every test
 // we only need ti connect to mongo once
 //
@@ -17,8 +17,17 @@ before((done) => {
     });
 });
 
+// Drop test collections after test has run through
 beforeEach((done) =>{
-  mongoose.connection.collections.users.drop(() =>{
-    done();
+  const { users, comments, blogposts } = mongoose.connection.collections;  // simply loads all collections into consts
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        done();
+      });
+    });
   });
 });
+
+
+// what is this file doing???

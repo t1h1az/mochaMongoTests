@@ -6,7 +6,7 @@ describe('Reading in the database', () =>{
   // to be created with done callback
 
   beforeEach((done) => {
-    joe = new User({ name: 'joefaee'});
+    joe = new User({ name: 'Joe'});
     joe.save()
       .then(() => {
         done();
@@ -15,7 +15,7 @@ describe('Reading in the database', () =>{
 
   // find one specific user
   it('searches a user', (done) => {
-    User.find({name: "joefaee"})
+    User.find({name: "Joe"})
       .then((users) => {
         assert(users[0]._id.toString() === joe._id.toString());
         console.log(users);

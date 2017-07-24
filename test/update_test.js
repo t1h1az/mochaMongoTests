@@ -5,7 +5,7 @@ describe('Updating database', () => {
   let joe;
 
   beforeEach((done) => {
-    joe = new User({name: 'joe'});
+    joe = new User({name: 'Joe', postCount: 0});
     joe.save()
       .then(() => done());
   });
@@ -30,24 +30,33 @@ describe('Updating database', () => {
     assertName(joe.update({ name: 'Sue' }), done);
   });
 
-  it('xa modal class can update', (done) => {
+  it('a model class can update', (done) => {
     assertName(
-      User.update({name: 'joe'}, {name : 'Sue'}),
+      User.update({name: 'Joe'}, {name : 'Sue'}),
       done
     );
   });
 
-  it(' a modal class can find one and update', (done) => {
+  it(' a model class can find one and update', (done) => {
     assertName(
-      User.findOneAndUpdate({name: 'joe'}, {name : 'Sue'}),
+      User.findOneAndUpdate({name: 'Joe'}, {name : 'Sue'}),
       done
     );
   });
 
-  it(' a modal class can find one by id and update', (done) => {
+  it(' a model class can find one by id and update', (done) => {
     assertName(
       User.findByIdAndUpdate(joe._id, {name : 'Sue'}),
       done
     );
+  });
+
+  it('a users postCount will be updated', (done) => {
+    User.update({ name: 'Joe' }, { $inc: { postCount: 1 }})
+     .then(() => User.findOne({name: 'Joe'}))
+     .then((user) => {
+       assert(user.postCount === 1);
+       done();
+     });
   });
 });
