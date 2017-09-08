@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const BlogPost = require('../src/models/blogpost');
 const Comment = require('../src/models/comment');
 const User = require('../src/models/user');
+const assert = require('assert');
 
 describe('Association Test', (done) => {
   let joe, comment, blogPost;
@@ -24,7 +25,9 @@ describe('Association Test', (done) => {
 
   it('saves a relation between an user and a blogpost', (done) => {
     User.findOne({name: 'Joe'})
+      .populate('blogPosts')
       .then((user) => {
+        assert(user.blogPosts[0].title === 'Islands you must visit');
         console.log(user);
         done();
       });

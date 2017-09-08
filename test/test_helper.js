@@ -31,3 +31,4 @@ beforeEach((done) =>{
 
 
 // what is this file doing???
+// => connecting to database and emptying database before every new test.

@@ -17,7 +17,7 @@ describe('subdocuments',() => {
     done();
   });
 
-  it('can update subdocuments in array', (done) => {
+  it('can update subdocuments to in an array', (done) => {
     const joe = new User({
       name: 'Joe',
       posts: [{title: 'posttitle'}],
@@ -36,6 +36,29 @@ describe('subdocuments',() => {
 
       done();
 
+    it('can remove an existing subdocument', (done) => {
+      const joe = new User({
+        name: 'Joe',
+        posts: [{ title: 'blogpost'}]
+      });
+
+      joe.save()
+        .then(() => User.findOne({name: 'Joe'}))
+        .then((user) => {
+          // problem with slice and splice ... vanila js is pain
+          // mongoose offers alternate api
+          const post = user.posts[0];
+          post.remove();
+          return user.save();
+          //dont write
+        })
+        .then(() => User.findOne({name: 'Joe'}))
+        .then((user) => {
+          assert(user.post.lenght === 0);
+        });
+      done();
+
+    });
 
 
   });
