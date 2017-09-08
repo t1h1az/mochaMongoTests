@@ -39,18 +39,13 @@ take ownership of the mongoDB
 
 -Rv prints out the list of dir changed
 
-#### to run mongo server in background
-
-careful mongoDB is run everytime your computer runs
 
 ```
   $ brew services start mongo
 ```
 
 
-##Robomongo
+## Robo 3T
 ---
-Super cool tool that gives as a graphical overview over all
-data in our mongodb collections.
 
-Just download Robomongo from
+used to check database
